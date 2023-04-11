@@ -4,21 +4,21 @@ pipeline {
 
    stages {
    
-     stage('Install Dependencies') { 
+     stage('fmt') { 
         steps { 
-           sh 'npm install' 
+           sh 'terraform fmt'
         }
      }
      
-     stage('Test') { 
+     stage('init') { 
         steps { 
-           sh 'echo "testing application..."'
+           sh 'terraform init'
         }
       }
 
-         stage("Deploy application") { 
+         stage("plan") { 
          steps { 
-           sh 'echo "deploying application..."'
+           sh 'terraform plan'
          }
 
      }
