@@ -1,28 +1,34 @@
 pipeline { 
-  
+
    agent any
 
    stages {
-   
-     stage('Install Dependencies') { 
-        steps { 
-           sh 'npm install' 
+
+     stage('fmt') {
+        steps {
+           sh 'terraform fmt'
         }
      }
-     
-     stage('Test') { 
-        steps { 
-           sh 'echo "testing application..."'
+
+     stage('init') {
+        steps {
+           sh 'terraform init'
         }
       }
 
-         stage("Deploy application") { 
-         steps { 
-           sh 'echo "deploying application..."'
+         stage("plan") {
+         steps {
+           sh 'terraform plan'
          }
 
      }
-  
-   	}
+         stage("apply") {
+         steps {
+           sh 'terraform apply --auto-approve'
+         }
+
+     }
+
+        }
 
    }
